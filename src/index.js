@@ -29,32 +29,21 @@ const getImages = function () {
 getImages();
 //-----------------------------------------------------------------------------
 const breedUrl = "https://dog.ceo/api/breeds/list/all";
+
 const databreed = function () {
+  let containerBreed = document.getElementById("dog-breeds");
   fetch(breedUrl)
     .then((resp) => resp.json())
-    .then((data) => renderDogBreed(data));
-};
-
-databreed(breedUrl);
-
-const renderDogBreed = function (images) {
-  let containerBreed = document.getElementById("dog-breeds");
-  for (let i of images.message) {
-    let li = document.createElement("li");
-    let img = document.createElement("img");
-    img.src = i;
-    li.append(img);
-    containerBreed.append(li);
-  }
+    .then((data) =>
+      data.message.forEach((index) => {
+        let li = document.createElement("li");
+        let img = document.createElement("img");
+        img.src = index;
+        li.append(img);
+        containerBreed.append(li);
+      })
+    );
 };
 
 getImages();
 databreed();
-// Event listners =>
-// let li = document.getElementsByName("li");
-// function changeColor() {
-//   li.style.font.color = "blue";
-// }
-// li.addEventListener("click", () => changeColor);
-
-//----------------------------------------------------------
