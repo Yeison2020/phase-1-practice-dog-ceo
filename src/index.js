@@ -31,18 +31,20 @@ getImages();
 const breedUrl = "https://dog.ceo/api/breeds/list/all";
 
 const databreed = function () {
-  let containerBreed = document.getElementById("dog-breeds");
   fetch(breedUrl)
     .then((resp) => resp.json())
-    .then((data) =>
-      data.message.forEach((index) => {
+    .then((data) => {
+      let dataArray = [];
+      dataArray.push(data);
+      dataArray.forEach((index) => {
+        let containerBreed = document.getElementById("dog-breeds");
         let li = document.createElement("li");
         let img = document.createElement("img");
-        img.src = index;
+        img.src = index.src;
         li.append(img);
-        containerBreed.append(li);
-      })
-    );
+        // containerBreed.append(li);
+      });
+    });
 };
 
 getImages();
